@@ -21,13 +21,43 @@
 
   <main class="container py-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
       <h1 class="h4 mb-0">Panel de monitoreo</h1>
       <span class="text-muted small" id="ultima-actualizacion"></span>
     </div>
 
+    <!-- Filtros: una sola fila, aplican a todo lo de abajo -->
+    <div class="row g-2 mb-4">
+      <div class="col-6 col-md-3">
+        <label class="form-label small text-muted mb-1" for="filtro-sede">Sede</label>
+        <select class="form-select form-select-sm" id="filtro-sede">
+          <option value="">Todas</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-3">
+        <label class="form-label small text-muted mb-1" for="filtro-camara">Cámara</label>
+        <select class="form-select form-select-sm" id="filtro-camara">
+          <option value="">Todas</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-3">
+        <label class="form-label small text-muted mb-1" for="filtro-tipo">Tipo de alerta</label>
+        <select class="form-select form-select-sm" id="filtro-tipo">
+          <option value="">Todos</option>
+          <option value="temp_alta">Temperatura alta</option>
+          <option value="temp_baja">Temperatura baja</option>
+          <option value="humedad_alta">Humedad alta</option>
+          <option value="apertura">Apertura de puerta</option>
+          <option value="movimiento">Movimiento</option>
+          <option value="agua">Agua / fuga</option>
+          <option value="humo">Humo</option>
+          <option value="sin_senal">Sin señal</option>
+        </select>
+      </div>
+    </div>
+
     <!-- KPIs -->
-    <div class="row g-3 mb-4" id="kpis">
+    <div class="row g-3 mb-4">
       <div class="col-6 col-md-3">
         <div class="card text-center h-100">
           <div class="card-body">
@@ -53,18 +83,31 @@
         </div>
       </div>
       <div class="col-6 col-md-3">
-        <div class="card text-center h-100 border-danger" id="card-alertas">
+        <div class="card text-center h-100">
           <div class="card-body">
-            <div class="fs-2 fw-bold text-danger" id="kpi-alertas">—</div>
-            <div class="text-muted small">Alertas activas</div>
+            <div class="fs-2 fw-bold" id="kpi-alertas">—</div>
+            <div class="text-muted small">Alertas últimas 24 h</div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Gráfico de temperatura -->
+    <div class="card mb-4">
+      <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <strong id="chart-titulo">Temperatura — histórico reciente</strong>
+        <span class="text-muted small" id="chart-subtitulo"></span>
+      </div>
+      <div class="card-body position-relative" id="chart-wrap">
+        <svg id="chart" width="100%" height="260" role="img" aria-label="Histórico de temperatura"></svg>
+        <div id="chart-tooltip" class="viz-tooltip d-none"></div>
+        <div class="text-center text-muted small py-5 d-none" id="chart-vacio">Sin lecturas para esta cámara</div>
+      </div>
+    </div>
+
     <div class="row g-4">
       <!-- Últimas lecturas por cámara -->
-      <div class="col-lg-7">
+      <div class="col-lg-6">
         <div class="card">
           <div class="card-header bg-white">
             <strong>Última temperatura por cámara</strong>
@@ -87,22 +130,17 @@
         </div>
       </div>
 
-      <!-- Alertas activas -->
-      <div class="col-lg-5">
+      <!-- Historial de alertas -->
+      <div class="col-lg-6">
         <div class="card">
-          <div class="card-header bg-white">
-            <strong>Alertas activas</strong>
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <strong>Historial de alertas</strong>
+            <span class="text-muted small" id="alertas-total"></span>
           </div>
-          <div class="table-responsive">
+          <div class="table-responsive" style="max-height: 420px; overflow-y: auto;">
             <table class="table align-middle mb-0">
-              <thead class="table-light">
-                <tr>
-                  <th>Alerta</th>
-                  <th></th>
-                </tr>
-              </thead>
               <tbody id="tabla-alertas">
-                <tr><td colspan="2" class="text-center text-muted py-4">Cargando…</td></tr>
+                <tr><td class="text-center text-muted py-4">Cargando…</td></tr>
               </tbody>
             </table>
           </div>

@@ -10,10 +10,62 @@
   font-weight: 700;
 }
 
-#card-alertas.sin-alertas {
-  border-color: var(--bs-border-color);
+/* ── Gráfico de temperatura ─────────────────────────────────────── */
+
+#chart-wrap {
+  /* Tokens del gráfico (paleta de referencia, modo claro) */
+  --viz-series: #2a78d6;      /* serie: azul categórico slot 1 */
+  --viz-critical: #d03b3b;    /* estado crítico: fuera de rango */
+  --viz-grid: #e1e0d9;        /* gridline hairline */
+  --viz-axis: #c3c2b7;        /* eje / baseline */
+  --viz-muted: #898781;       /* texto de ejes */
+  --viz-ink: #0b0b0b;         /* texto primario */
+  --viz-surface: #ffffff;     /* superficie de la card */
 }
 
-#card-alertas.sin-alertas .fs-2 {
-  color: var(--bs-success) !important;
+#chart {
+  display: block;
+}
+
+#chart text {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 11px;
+  fill: var(--viz-muted);
+}
+
+#chart .tick-y {
+  font-variant-numeric: tabular-nums;
+}
+
+#chart .etiqueta-final {
+  fill: var(--viz-ink);
+  font-weight: 600;
+}
+
+.viz-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--viz-surface, #fff);
+  border: 1px solid rgba(11, 11, 11, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 6px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.viz-tooltip .valor {
+  font-weight: 700;
+  color: var(--viz-ink, #0b0b0b);
+}
+
+.viz-tooltip .fuera {
+  color: var(--viz-critical, #d03b3b);
+  font-weight: 600;
+}
+
+.viz-tooltip .hora {
+  color: var(--viz-muted, #898781);
 }
