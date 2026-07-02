@@ -8,6 +8,9 @@ document.getElementById('usuario-info').textContent = usuario
   ? `${usuario.nombre} (${usuario.rol})`
   : '';
 document.getElementById('btn-logout').addEventListener('click', cerrarSesion);
+if (usuario && usuario.rol === 'admin') {
+  document.getElementById('nav-usuarios').classList.remove('d-none');
+}
 
 // ── Estado ──────────────────────────────────────────────────────────
 

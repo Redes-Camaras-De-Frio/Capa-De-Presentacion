@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios — MonitoreoCF</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">❄️ MonitoreoCF</span>
+      <div class="navbar-nav me-auto">
+        <a class="nav-link" href="index.html">Panel</a>
+        <a class="nav-link active" href="usuarios.html">Usuarios</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-light small" id="usuario-info"></span>
+        <button class="btn btn-outline-light btn-sm" id="btn-logout">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h4 mb-0">Gestión de usuarios</h1>
+      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-crear">
+        + Nuevo usuario
+      </button>
+    </div>
+
+    <div id="aviso" class="alert d-none" role="alert"></div>
+
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Usuario</th>
+              <th>Rol</th>
+              <th>Sedes con acceso</th>
+              <th>Estado</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-usuarios">
+            <tr><td colspan="5" class="text-center text-muted py-4">Cargando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal: crear usuario -->
+  <div class="modal fade" id="modal-crear" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="form-crear">
+        <div class="modal-header">
+          <h2 class="modal-title h6">Nuevo usuario</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div id="error-crear" class="alert alert-danger d-none"></div>
+          <div class="mb-3">
+            <label class="form-label" for="crear-nombre">Nombre</label>
+            <input type="text" class="form-control" id="crear-nombre" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="crear-email">Correo electrónico</label>
+            <input type="email" class="form-control" id="crear-email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="crear-password">Contraseña (mínimo 6 caracteres)</label>
+            <input type="password" class="form-control" id="crear-password" minlength="6" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="crear-rol">Rol</label>
+            <select class="form-select" id="crear-rol">
+              <option value="operador" selected>Operador</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </div>
+          <div class="mb-2" id="grupo-sedes">
+            <label class="form-label d-block">Sedes con acceso</label>
+            <div id="crear-sedes" class="d-flex flex-wrap gap-3"></div>
+            <div class="form-text">Un administrador accede a todas las sedes; no necesita asignación.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-crear">Crear usuario</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: editar sedes -->
+  <div class="modal fade" id="modal-sedes" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="form-sedes">
+        <div class="modal-header">
+          <h2 class="modal-title h6" id="titulo-sedes">Sedes del usuario</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div id="error-sedes" class="alert alert-danger d-none"></div>
+          <div id="editar-sedes" class="d-flex flex-wrap gap-3"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/usuarios.js"></script>
+</body>
+</html>
