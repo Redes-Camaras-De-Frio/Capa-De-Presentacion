@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salud del sistema — MonitoreoCF</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">❄️ MonitoreoCF</span>
+      <div class="navbar-nav me-auto">
+        <a class="nav-link" href="index.html">Panel</a>
+        <a class="nav-link" href="usuarios.html">Usuarios</a>
+        <a class="nav-link active" href="salud.html">Salud</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-light small" id="usuario-info"></span>
+        <button class="btn btn-outline-light btn-sm" id="btn-logout">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h4 mb-0">Salud del sistema</h1>
+      <span class="text-muted small" id="ultima-actualizacion"></span>
+    </div>
+
+    <!-- Estado de componentes -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <div class="fs-4 fw-bold" id="estado-api">—</div>
+            <div class="text-muted small">API <span id="api-uptime"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <div class="fs-4 fw-bold" id="estado-bd">—</div>
+            <div class="text-muted small">Base de datos <span id="bd-latencia"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <div class="fs-4 fw-bold" id="estado-sensores">—</div>
+            <div class="text-muted small">Sensores reportando</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <div class="fs-4 fw-bold" id="estado-sin-senal">—</div>
+            <div class="text-muted small">Sin señal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <strong>Sensores</strong>
+        <span class="text-muted small" id="umbral-info"></span>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Sede</th>
+              <th>Cámara</th>
+              <th>Sensor</th>
+              <th>Última lectura</th>
+              <th>Hace</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-sensores">
+            <tr><td colspan="6" class="text-center text-muted py-4">Cargando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/salud.js"></script>
+</body>
+</html>

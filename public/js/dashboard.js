@@ -10,6 +10,7 @@ document.getElementById('usuario-info').textContent = usuario
 document.getElementById('btn-logout').addEventListener('click', cerrarSesion);
 if (usuario && usuario.rol === 'admin') {
   document.getElementById('nav-usuarios').classList.remove('d-none');
+  document.getElementById('nav-salud').classList.remove('d-none');
 }
 
 // ── Estado ──────────────────────────────────────────────────────────
