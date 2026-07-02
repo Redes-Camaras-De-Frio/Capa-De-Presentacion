@@ -1,0 +1,19 @@
+/* Ajustes propios sobre Bootstrap */
+
+.temp-ok {
+  color: var(--bs-success);
+  font-weight: 600;
+}
+
+.temp-fuera {
+  color: var(--bs-danger);
+  font-weight: 700;
+}
+
+#card-alertas.sin-alertas {
+  border-color: var(--bs-border-color);
+}
+
+#card-alertas.sin-alertas .fs-2 {
+  color: var(--bs-success) !important;
+}

@@ -1,0 +1,12 @@
+services:
+  dashboard:
+    build: .
+    container_name: cadena_frio_dashboard
+    ports:
+      - "8080:80"
+    networks:
+      - cadena_frio_net
+
+networks:
+  cadena_frio_net:
+    driver: bridge

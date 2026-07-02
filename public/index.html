@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — MonitoreoCF</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">❄️ MonitoreoCF</span>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-light small" id="usuario-info"></span>
+        <button class="btn btn-outline-light btn-sm" id="btn-logout">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h4 mb-0">Panel de monitoreo</h1>
+      <span class="text-muted small" id="ultima-actualizacion"></span>
+    </div>
+
+    <!-- KPIs -->
+    <div class="row g-3 mb-4" id="kpis">
+      <div class="col-6 col-md-3">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <div class="fs-2 fw-bold" id="kpi-sedes">—</div>
+            <div class="text-muted small">Sedes</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <div class="fs-2 fw-bold" id="kpi-camaras">—</div>
+            <div class="text-muted small">Cámaras de frío</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <div class="fs-2 fw-bold" id="kpi-sensores">—</div>
+            <div class="text-muted small">Sensores</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center h-100 border-danger" id="card-alertas">
+          <div class="card-body">
+            <div class="fs-2 fw-bold text-danger" id="kpi-alertas">—</div>
+            <div class="text-muted small">Alertas activas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Últimas lecturas por cámara -->
+      <div class="col-lg-7">
+        <div class="card">
+          <div class="card-header bg-white">
+            <strong>Última temperatura por cámara</strong>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Cámara</th>
+                  <th class="text-end">Temperatura</th>
+                  <th>Rango permitido</th>
+                  <th>Registrado</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-lecturas">
+                <tr><td colspan="4" class="text-center text-muted py-4">Cargando…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alertas activas -->
+      <div class="col-lg-5">
+        <div class="card">
+          <div class="card-header bg-white">
+            <strong>Alertas activas</strong>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Alerta</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="tabla-alertas">
+                <tr><td colspan="2" class="text-center text-muted py-4">Cargando…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
