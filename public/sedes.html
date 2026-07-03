@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sedes — MonitoreoCF</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">❄️ MonitoreoCF</span>
+      <div class="navbar-nav me-auto">
+        <a class="nav-link" href="index.html">Panel</a>
+        <a class="nav-link" href="usuarios.html">Usuarios</a>
+        <a class="nav-link" href="salud.html">Salud</a>
+        <a class="nav-link active" href="sedes.html">Sedes</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-light small" id="usuario-info"></span>
+        <button class="btn btn-outline-light btn-sm" id="btn-logout">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h4 mb-0">Sedes y cámaras de frío</h1>
+      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-sede">
+        + Nueva sede
+      </button>
+    </div>
+
+    <div id="aviso" class="alert d-none" role="alert"></div>
+
+    <div id="lista-sedes">
+      <div class="text-center text-muted py-5">Cargando…</div>
+    </div>
+
+  </main>
+
+  <!-- Modal: nueva sede -->
+  <div class="modal fade" id="modal-sede" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="form-sede">
+        <div class="modal-header">
+          <h2 class="modal-title h6">Nueva sede</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div id="error-sede" class="alert alert-danger d-none"></div>
+          <div class="mb-3">
+            <label class="form-label" for="sede-nombre">Nombre</label>
+            <input type="text" class="form-control" id="sede-nombre" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="sede-tipo">Tipo</label>
+            <select class="form-select" id="sede-tipo">
+              <option value="farmacia">Farmacia</option>
+              <option value="distribuidora">Distribuidora</option>
+              <option value="botica">Botica</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <label class="form-label" for="sede-direccion">Dirección</label>
+            <input type="text" class="form-control" id="sede-direccion">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Crear sede</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: nueva cámara -->
+  <div class="modal fade" id="modal-camara" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="form-camara">
+        <div class="modal-header">
+          <h2 class="modal-title h6" id="titulo-camara">Nueva cámara</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div id="error-camara" class="alert alert-danger d-none"></div>
+          <div class="mb-3">
+            <label class="form-label" for="camara-nombre">Nombre</label>
+            <input type="text" class="form-control" id="camara-nombre" required>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label class="form-label" for="camara-min">Temp. mínima (°C)</label>
+              <input type="number" step="0.5" class="form-control" id="camara-min" value="2" required>
+            </div>
+            <div class="col">
+              <label class="form-label" for="camara-max">Temp. máxima (°C)</label>
+              <input type="number" step="0.5" class="form-control" id="camara-max" value="8" required>
+            </div>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="camara-sensores-defecto" checked>
+            <label class="form-check-label" for="camara-sensores-defecto">
+              Crear sensores por defecto (temperatura, humedad, apertura)
+            </label>
+            <div class="form-text">Sin sensores, la cámara nunca reportará lecturas ni alertas.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Crear cámara</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: nuevo sensor -->
+  <div class="modal fade" id="modal-sensor" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="form-sensor">
+        <div class="modal-header">
+          <h2 class="modal-title h6" id="titulo-sensor">Nuevo sensor</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div id="error-sensor" class="alert alert-danger d-none"></div>
+          <div class="mb-2">
+            <label class="form-label" for="sensor-tipo">Tipo de sensor</label>
+            <select class="form-select" id="sensor-tipo">
+              <option value="temperatura">Temperatura (°C)</option>
+              <option value="humedad">Humedad (%)</option>
+              <option value="apertura">Apertura de puerta</option>
+              <option value="movimiento">Movimiento</option>
+              <option value="agua">Agua / fuga</option>
+              <option value="humo">Humo</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Agregar sensor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/sedes.js"></script>
+</body>
+</html>
